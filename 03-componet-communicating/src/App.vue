@@ -1,46 +1,37 @@
 <script setup>
 import { ref } from 'vue'
+import UserCard from './components/UserCard.vue'
 
 /* ===== DỮ LIỆU CỦA CHA ===== */
-const messageFromChild = ref('Chưa có gì từ con')
+const userName = ref('Nguyễn Văn A')
+const userAge = ref(20)
 
 /* ===== HÀM NHẬN EVENT TỪ CON ===== */
-const handleHello = (data) => {
-  messageFromChild.value = data
-}
-
-/* ===== KHAI BÁO COMPONENT CON NGAY TRONG APP ===== */
-const ChildComponent = {
-  props: {
-    name: String
-  },
-  emits: ['say-hello'],
-  template: `
-    <div style="border:1px solid #ccc; padding:10px; margin-top:10px">
-      <p>Con: Xin chào {{ name }}</p>
-      <button @click="sendHello">
-        Gửi lời chào lên cha
-      </button>
-    </div>
-  `,
-  methods: {
-    sendHello() {
-      this.$emit('say-hello', 'Con đã gửi lời chào 👋')
-    }
-  }
+const handleUpdateAge = (amount) => {
+  userAge.value += amount
+  alert(`Cha đã nhận được yêu cầu tăng ${amount} tuổi!`)
 }
 </script>
 
 <template>
-  <div>
+  <div class="container">
     <h1>Component & Communicating Event</h1>
+    <p>Dữ liệu ở Cha: {{ userName }} - {{ userAge }} tuổi</p>
 
-    <p><b>Cha nhận được:</b> {{ messageFromChild }}</p>
-
-    <!-- Component con -->
-    <ChildComponent
-      name="Nam"
-      @say-hello="handleHello"
+    <!-- Truyền Props xuống con và Lắng nghe Event từ con -->
+    <UserCard 
+      :name="userName"
+      :age="userAge"
+      @update-age="handleUpdateAge"
     />
   </div>
 </template>
+
+<style>
+.container {
+  font-family: sans-serif;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+}
+</style>

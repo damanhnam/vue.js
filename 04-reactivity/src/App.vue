@@ -9,10 +9,11 @@ function tang() {
   count.value++
   
 }
-function giam(){
-  if (count.value>0){
-  count.value--
-}}
+function giam() {
+  if (count.value > 0) {
+    count.value--
+  }
+}
 
 /* số gấp đôi */
 const gapDoi = computed(() => {
@@ -20,8 +21,9 @@ const gapDoi = computed(() => {
 })
 
 /* theo dõi count */
-watch(count, (val) => {
-  if (val == 7) {
+watch(count, (val, oldVal) => {
+  // Chỉ hiện thông báo khi tăng lên 7 (tức là giá trị mới > giá trị cũ)
+  if (val == 7 && val > oldVal) {
     alert('Đã bấm 7 lần')
   }
 })
