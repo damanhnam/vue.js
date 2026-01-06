@@ -5,12 +5,15 @@ const count = ref(0);
 
 
 const greet = (event) => {
-  alert(`Xin chào mọi người - event: ${event.type}`);
+  alert(`Xin chào mọi người  ${event.type}`);
 };
 
 const sayHi = (name) => {
   alert(`Xin chào ${name}`);
 };
+const attributeName ='href'
+const url = 'https://www.facebook.com/?locale=vi_VN'
+
 </script>
 
 <template>
@@ -24,5 +27,6 @@ const sayHi = (name) => {
 
     <button @click="sayHi('Nam')">chào Nam</button>
     <button @click="sayHi('Anh')">chào Anh</button>
+    <a v-bind:[attributeName]="url">Click here</a>
   </div>
 </template>
